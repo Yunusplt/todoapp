@@ -1,8 +1,11 @@
-from django.urls import path
-from .views import home,todo_list_create,todo_get_delete_update
+from django.urls import path,include
+from .views import home,TodosMVS
+
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
+router.register("list", TodosMVS)
 
 urlpatterns = [
     path('', home ),
-    path("list", todo_list_create ),
-    path('list/<int:pk>', todo_get_delete_update),
+    path("", include(router.urls))
 ]
